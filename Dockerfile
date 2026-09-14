@@ -8,8 +8,12 @@ WORKDIR /app
 ARG VITE_STRAPI_URL=""
 ENV VITE_STRAPI_URL=$VITE_STRAPI_URL
 
+# Usa `npm install` (não `npm ci`): o package-lock.json está desatualizado em
+# relação ao package.json (o projeto é instalado com pnpm localmente), então o
+# `npm ci` falha com "out of sync". O `npm install` reconcilia o lockfile e
+# instala exatamente a versão fixada no package.json.
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm install --no-audit --no-fund
 
 COPY . .
 RUN npm run build
