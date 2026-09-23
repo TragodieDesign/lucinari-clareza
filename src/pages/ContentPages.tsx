@@ -1,5 +1,5 @@
 import { ArrowUpRight, ChevronRight, Search } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import { categories, contentItems, glossary, type ContentKind } from "@/lib/content";
 
@@ -9,6 +9,20 @@ const config: Record<ContentKind, { title: string; intro: string; label: string;
   case: { title: "Conhecimento e transformações que geram valor.", intro: "Palestras, treinamentos e projetos que conectam estratégia, execução e valor.", label: "Cases", keyword: "palestras, treinamentos e cases de gestão" },
 };
 const setSeo = (title: string, description: string) => { document.title = `${title} | Lucinari Consulting`; const meta = document.querySelector('meta[name="description"]'); if (meta) meta.setAttribute("content", description); };
+
+const renderBody = (paragraphs: string[]) => {
+  const nodes: ReactNode[] = [];
+  let list: string[] = [];
+  const flushList = () => { if (list.length) { nodes.push(<ul key={`ul-${nodes.length}`} className="space-y-3">{list.map((line) => <li key={line} className="flex gap-3"><span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c7a45b]"/><span>{line}</span></li>)}</ul>); list = []; } };
+  paragraphs.forEach((line, index) => {
+    if (line.startsWith("## ")) { flushList(); nodes.push(<h2 key={index} className="pt-4 font-fraunces text-3xl text-[#0e302e]">{line.slice(3)}</h2>); }
+    else if (line.startsWith("### ")) { flushList(); nodes.push(<h3 key={index} className="pt-3 font-fraunces text-2xl text-[#0e302e]">{line.slice(4)}</h3>); }
+    else if (line.startsWith("- ")) { list.push(line.slice(2)); }
+    else { flushList(); nodes.push(<p key={index}>{line}</p>); }
+  });
+  flushList();
+  return nodes;
+};
 
 export const ArchivePage = ({ kind }: { kind: ContentKind }) => {
   const [category, setCategory] = useState("Todos"); const data = config[kind];
