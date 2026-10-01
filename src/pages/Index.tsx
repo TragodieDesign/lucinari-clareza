@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BrandImage from "@/components/BrandImage";
 
 const solutions = [
-  { title: "Governança & Gestão de Projetos", text: "Visão executiva conectada à execução tática com previsibilidade e dados.", image: "/assets/governanca-pmo.png", path: "/solucoes/governanca-gestao-projetos", result: "Decisões claras, entrega previsível." },
+  { title: "Gestão de Projetos", text: "O carro-chefe da Lucinari: visão executiva conectada à execução tática com previsibilidade e dados.", image: "/assets/governanca-pmo.png", path: "/solucoes/governanca-gestao-projetos", result: "Decisões claras, entrega previsível." },
   { title: "Escritório de Projetos (PMO / VMO)", text: "Um centro gerador e mensurador de valor para a gestão de projetos.", image: "/assets/vmo-valor.png", path: "/solucoes/estruturacao-pmo-vmo", result: "Projetos que medem valor." },
   { title: "Gestão Ágil", text: "Mais velocidade de resposta ao negócio e menos retrabalho.", image: "/assets/Margareth_Consulting_Agile.png", path: "/solucoes/gestao-agil", result: "Times mais rápidos e focados." },
   { title: "Educação Executiva", text: "Competências de times e lideranças para sustentar a mudança com autonomia.", image: "/assets/educacao-executiva.png", path: "/solucoes/educacao-executiva", result: "Capacidade que permanece." },
@@ -35,7 +35,7 @@ const Index = () => (
           <p className="font-outfit text-[11px] font-bold uppercase tracking-[.22em] text-[#e2c88c]">Gestão de Projetos · Gestão Ágil · Governança · PMO</p>
           <h1 className="mt-5 font-fraunces text-6xl leading-[.94] text-white lg:text-8xl">Da estratégia<br />à <em className="font-normal text-[#e2c88c]">entrega</em>:</h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/75">Transformando planos complexos em resultados previsíveis.</p>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60">Consultoria especializada em governança pragmática, estruturação de PMO/VMO e metodologias ágeis para acelerar o valor do seu negócio.</p>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60">Consultoria especializada em gestão de projetos, governança pragmática, estruturação de PMO/VMO e metodologias ágeis para acelerar o valor do seu negócio.</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <button onClick={openChat} className="rounded-full bg-[#c7a45b] px-6 py-3.5 font-outfit text-xs font-bold uppercase tracking-wider text-[#0e302e]">Falar com especialista</button>
             <a href="#solucoes" className="rounded-full border border-white/35 px-6 py-3.5 font-outfit text-xs font-bold uppercase tracking-wider text-white">Conhecer soluções</a>
