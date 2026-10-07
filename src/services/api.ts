@@ -61,6 +61,30 @@ export type CompanyInfo = {
   facebookPage: string | null;
 };
 
+export type CaseStudy = {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  description: StrapiBlock[];
+  client: string | null;
+  date: string | null;
+  cover: StrapiMedia | null;
+};
+
+export type KnowledgeItem = {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: StrapiBlock[];
+  featured: boolean | null;
+  published_date: string;
+  cover: StrapiMedia | null;
+};
+
 type StrapiListResponse = {
   data: BlogPost[];
   meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number } };
@@ -111,6 +135,40 @@ type StrapiCompanyInfoResponse = {
 export async function getCompanyInfo(): Promise<CompanyInfo | null> {
   const data = await request<StrapiCompanyInfoResponse>(`${API_URL}/company-info?populate=*`);
   return data.data ?? null;
+}
+
+type StrapiCaseListResponse = {
+  data: CaseStudy[];
+  meta?: unknown;
+};
+
+type StrapiKnowledgeListResponse = {
+  data: KnowledgeItem[];
+  meta?: unknown;
+};
+
+export async function getCases(): Promise<CaseStudy[]> {
+  const data = await request<StrapiCaseListResponse>(`${API_URL}/cases?populate=*`);
+  return data.data ?? [];
+}
+
+export async function getCaseBySlug(slug: string): Promise<CaseStudy | null> {
+  const data = await request<StrapiCaseListResponse>(
+    `${API_URL}/cases?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+  );
+  return data.data?.[0] ?? null;
+}
+
+export async function getKnowledges(): Promise<KnowledgeItem[]> {
+  const data = await request<StrapiKnowledgeListResponse>(`${API_URL}/knowledges?populate=*`);
+  return data.data ?? [];
+}
+
+export async function getKnowledgeBySlug(slug: string): Promise<KnowledgeItem | null> {
+  const data = await request<StrapiKnowledgeListResponse>(
+    `${API_URL}/knowledges?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+  );
+  return data.data?.[0] ?? null;
 }
 
 // O Strapi devolve caminhos relativos (/uploads/...). A origem dos arquivos é a
