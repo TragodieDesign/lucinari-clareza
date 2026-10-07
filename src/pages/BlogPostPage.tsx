@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BrandImage from "@/components/BrandImage";
 import RichText from "@/components/RichText";
+import { setJsonLd, setSeo } from "@/lib/seo";
 import { buildMediaUrl, getBlogPostBySlug, type BlogPost } from "@/services/api";
 
 const formatDate = (value: string) => {
@@ -36,7 +37,25 @@ const BlogPostPage = () => {
         }
         setPost(data);
         setStatus("success");
-        document.title = `${data.title} | Lucinari Consulting`;
+        const coverUrl = buildMediaUrl(data.cover?.url);
+        const canonicalUrl = `${window.location.origin}/blog/${data.slug}`;
+        setSeo({
+          title: `${data.title} | Lucinari Consulting`,
+          description: data.excerpt,
+          image: coverUrl,
+          url: canonicalUrl,
+          type: "article",
+        });
+        setJsonLd("blog-post", {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: data.title,
+          description: data.excerpt,
+          image: coverUrl,
+          datePublished: data.published_date,
+          mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+          publisher: { "@type": "Organization", name: "Lucinari Consulting" },
+        });
       })
       .catch(() => {
         if (active) setStatus("error");
