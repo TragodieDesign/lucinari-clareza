@@ -3,9 +3,12 @@ import type { StrapiBlock, StrapiTextNode } from "@/services/api";
 
 type Child = StrapiTextNode | StrapiBlock;
 
+const isTextNode = (child: Child): child is StrapiTextNode =>
+  typeof (child as StrapiTextNode).text === "string";
+
 const childrenText = (children?: Child[]): string =>
   (children ?? [])
-    .map((child) => ("text" in child ? child.text ?? "" : childrenText(child.children)))
+    .map((child) => (isTextNode(child) ? child.text ?? "" : childrenText(child.children)))
     .join("");
 
 // O campo "content" do Strapi guarda texto colado como blocos de parágrafo. Quando
