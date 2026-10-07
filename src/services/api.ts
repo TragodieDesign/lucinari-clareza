@@ -50,6 +50,17 @@ export type GlossaryTerm = {
   definition: StrapiBlock[];
 };
 
+export type CompanyInfo = {
+  id: number;
+  documentId: string;
+  companyName: string;
+  mail: string | null;
+  whatsapp: string | null;
+  instagram: string | null;
+  linkedin: string | null;
+  facebookPage: string | null;
+};
+
 type StrapiListResponse = {
   data: BlogPost[];
   meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number } };
@@ -90,6 +101,16 @@ export async function getGlossaryTermBySlug(slug: string): Promise<GlossaryTerm 
     `${API_URL}/glossaries?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
   );
   return data.data?.[0] ?? null;
+}
+
+type StrapiCompanyInfoResponse = {
+  data: CompanyInfo;
+  meta?: unknown;
+};
+
+export async function getCompanyInfo(): Promise<CompanyInfo | null> {
+  const data = await request<StrapiCompanyInfoResponse>(`${API_URL}/company-info?populate=*`);
+  return data.data ?? null;
 }
 
 // O Strapi devolve caminhos relativos (/uploads/...). A origem dos arquivos é a
