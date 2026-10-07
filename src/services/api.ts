@@ -41,15 +41,29 @@ export type BlogPost = {
   cover: StrapiMedia | null;
 };
 
+export type GlossaryTerm = {
+  id: number;
+  documentId: string;
+  term: string;
+  slug: string;
+  short_definition: string;
+  definition: StrapiBlock[];
+};
+
 type StrapiListResponse = {
   data: BlogPost[];
+  meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number } };
+};
+
+type StrapiGlossaryListResponse = {
+  data: GlossaryTerm[];
   meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number } };
 };
 
 async function request<T>(url: string): Promise<T> {
   const response = await fetch(url, { headers: { Accept: "application/json" } });
   if (!response.ok) {
-    throw new Error(`Não foi possível carregar os dados do blog (${response.status}).`);
+    throw new Error(`Não foi possível carregar os dados (${response.status}).`);
   }
   return (await response.json()) as T;
 }
@@ -62,6 +76,18 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   const data = await request<StrapiListResponse>(
     `${API_URL}/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
+  );
+  return data.data?.[0] ?? null;
+}
+
+export async function getGlossaryTerms(): Promise<GlossaryTerm[]> {
+  const data = await request<StrapiGlossaryListResponse>(`${API_URL}/glossaries?populate=*`);
+  return data.data ?? [];
+}
+
+export async function getGlossaryTermBySlug(slug: string): Promise<GlossaryTerm | null> {
+  const data = await request<StrapiGlossaryListResponse>(
+    `${API_URL}/glossaries?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`,
   );
   return data.data?.[0] ?? null;
 }
