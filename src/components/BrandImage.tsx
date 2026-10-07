@@ -32,6 +32,8 @@ const BrandImage = ({ src, alt = "", className = "", imgClassName = "", icon, la
           src={src}
           alt={alt}
           loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
           className={`absolute inset-0 h-full w-full object-cover ${imgClassName}`}
           onError={() => setFailed(true)}
         />
