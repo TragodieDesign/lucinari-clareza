@@ -129,7 +129,7 @@ const Index = () => (
       <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
         <Link to="/blog" className="rounded-2xl bg-white p-6 shadow-sm"><p className="font-outfit text-[10px] font-bold uppercase tracking-widest text-[#a07c3a]">Blog</p><h3 className="mt-5 font-fraunces text-2xl">Ideias que organizam decisões.</h3></Link>
         <Link to="/conhecimentos" className="rounded-2xl bg-white p-6 shadow-sm"><p className="font-outfit text-[10px] font-bold uppercase tracking-widest text-[#a07c3a]">Conhecimentos</p><h3 className="mt-5 font-fraunces text-2xl">Guias para avançar com método.</h3></Link>
-        <Link to="/cases" className="rounded-2xl bg-white p-6 shadow-sm"><p className="font-outfit text-[10px] font-bold uppercase tracking-widest text-[#a07c3a]">Cases</p><h3 className="mt-5 font-fraunces text-2xl">Transformações que geraram clareza.</h3></Link>
+        <Link to="/cases" className="rounded-2xl bg-white p-6 shadow-sm"><p className="font-outfit text-[10px] font-bold uppercase tracking-widest text-[#a07c3a]">Cases e Treinamentos</p><h3 className="mt-5 font-fraunces text-2xl">Transformações que geraram clareza.</h3></Link>
       </div>
     </section>
 

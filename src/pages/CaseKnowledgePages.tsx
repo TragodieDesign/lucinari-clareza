@@ -59,12 +59,12 @@ type CollectionConfig = {
 
 const collections: Record<"cases" | "conhecimentos", CollectionConfig> = {
   cases: {
-    label: "Cases",
+    label: "Cases e Treinamentos",
     keyword: "palestras, treinamentos e cases de gestão",
     title: "Conhecimento e transformações que geram valor.",
     intro: "Palestras, treinamentos e projetos que conectam estratégia, execução e valor.",
     backPath: "/cases",
-    backLabel: "Cases",
+    backLabel: "Cases e Treinamentos",
     list: async () => (await getCases()).map(mapCase),
     one: async (slug) => {
       const entry = await getCaseBySlug(slug);

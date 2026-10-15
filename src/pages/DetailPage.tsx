@@ -36,7 +36,7 @@ const approach = [
 const pages: Record<string, PageData> = {
   "governanca-gestao-projetos": {
     eyebrow: "Pilar 01",
-    title: "Gestão de Projetos",
+    title: "Governança e Gestão de Projetos",
     intro: "O carro-chefe da Lucinari: conectando a visão executiva à execução tática com previsibilidade e dados.",
     image: "/assets/governanca-pmo.png",
     outcome: "Decisões com direção clara e um portfólio que entrega com previsibilidade.",
@@ -46,6 +46,7 @@ const pages: Record<string, PageData> = {
       "Implantação de métricas de saúde, riscos e dashboards executivos em tempo real",
       "Diagnóstico de maturidade e plano de evolução metodológica",
       "Definição e gestão dos OKRs",
+      "Fornecimento de gestor de projeto dedicado",
     ],
     approach,
     audience: [
