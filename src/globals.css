@@ -17,3 +17,29 @@
 
 @keyframes enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 .animate-enter { animation: enter .8s ease-out both; }
+
+/* Conteúdo HTML vindo do CMS (artigos de blog). */
+.html-article { color: #0e302e; line-height: 1.85; }
+.html-article p { margin-bottom: 1.4rem; }
+.html-article h2 { font-family: 'Fraunces', serif; font-size: 1.9rem; line-height: 1.15; color: #0e302e; margin: 2.8rem 0 1rem; }
+.html-article h3 { font-family: 'Fraunces', serif; font-size: 1.25rem; line-height: 1.2; color: #0e302e; margin: 1.7rem 0 0.6rem; }
+.html-article ul { padding-left: 1.4rem; margin: 1.4rem 0; list-style: disc; }
+.html-article ol { padding-left: 1.4rem; margin: 1.4rem 0; list-style: decimal; }
+.html-article li { margin-bottom: 0.55rem; }
+.html-article a { color: #a07c3a; text-decoration: underline; text-underline-offset: 2px; }
+.html-article strong { font-weight: 600; }
+.html-article blockquote { border-left: 2px solid #c7a45b; padding-left: 1.1rem; font-style: italic; }
+.html-article img { border-radius: 1.2rem; width: 100%; height: auto; margin: 1.6rem 0; }
+.html-article .highlight { background: #f6efdd; border-left: 4px solid #c7a45b; padding: 1.4rem 1.5rem; border-radius: 1rem; margin: 1.9rem 0; }
+.html-article .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.7rem 0; }
+.html-article .card { border: 1px solid rgba(14, 48, 46, 0.12); border-radius: 1.1rem; padding: 1.3rem; background: #fff; }
+.html-article .card h3 { margin: 0 0 0.55rem; }
+.html-article .card p { margin: 0; font-size: 0.95rem; color: rgba(14, 48, 46, 0.75); }
+.html-article .quote { background: #0e302e; color: #fff; border-radius: 1.3rem; padding: 1.9rem 1.7rem 1.7rem; margin: 2.1rem 0; position: relative; }
+.html-article .quote::before { content: "“"; font-size: 4rem; line-height: 1; color: #e2c88c; opacity: 0.7; position: absolute; left: 1rem; top: 0.4rem; }
+.html-article .quote p { margin: 0 0 0 1.6rem; }
+.html-article .cta { background: #0e302e; color: #fff; border-radius: 1.4rem; padding: 2.2rem; margin-top: 3rem; }
+.html-article .cta h2 { color: #fff; margin-top: 0; }
+.html-article .cta p { color: rgba(255, 255, 255, 0.85); margin-bottom: 1rem; }
+.html-article .cta p:last-child { margin-bottom: 0; }
+.html-article footer { margin-top: 2.6rem; padding-top: 1.5rem; border-top: 1px solid rgba(14, 48, 46, 0.12); color: rgba(14, 48, 46, 0.68); font-size: 0.95rem; }

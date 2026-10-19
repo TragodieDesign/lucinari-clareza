@@ -2,6 +2,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BrandImage from "@/components/BrandImage";
+import HtmlContent from "@/components/HtmlContent";
 import RichText from "@/components/RichText";
 import { setJsonLd, setSeo } from "@/lib/seo";
 import { buildMediaUrl, getBlogPostBySlug, type BlogPost } from "@/services/api";
@@ -142,7 +143,11 @@ const BlogPostPage = () => {
           />
         )}
         <div className="mt-12">
-          <RichText content={post.content} />
+          {typeof post.content === "string" ? (
+            <HtmlContent html={post.content} />
+          ) : (
+            <RichText content={post.content} />
+          )}
         </div>
         <aside className="my-14 rounded-[1.6rem] bg-[#0e302e] p-8 text-white">
           <p className="font-outfit text-[10px] font-bold uppercase tracking-[.18em] text-[#e2c88c]">

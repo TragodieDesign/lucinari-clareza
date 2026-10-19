@@ -36,7 +36,7 @@ export type BlogPost = {
   title: string;
   slug: string;
   excerpt: string;
-  content: StrapiBlock[];
+  content: string | StrapiBlock[];
   published_date: string;
   cover: StrapiMedia | null;
 };
