@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { StrapiBlock, StrapiTextNode } from "@/services/api";
 
 type Child = StrapiTextNode | StrapiBlock;
@@ -78,6 +78,50 @@ const renderHtml = (html: string, key: number) => (
   <div key={key} dangerouslySetInnerHTML={{ __html: sanitizeHtml(html) }} />
 );
 
+// Indica se o bloco contém formatação inline ou links que precisam ser
+// renderizados como elementos (em vez de texto achatado).
+const hasInlineFormatting = (children?: Child[]): boolean =>
+  (children ?? []).some((child) =>
+    isTextNode(child)
+      ? Boolean(child.bold || child.italic || child.underline || child.strikethrough || child.code)
+      : child.type === "link" || hasInlineFormatting(child.children),
+  );
+
+const renderInlineNodes = (children: Child[]): ReactNode[] =>
+  children.map((child, i) => {
+    if (isTextNode(child)) {
+      const text = child.text ?? "";
+      let node: ReactNode = text;
+      if (child.bold) node = <strong key={i}>{node}</strong>;
+      if (child.italic) node = <em key={i}>{node}</em>;
+      if (child.underline) node = <u key={i}>{node}</u>;
+      if (child.strikethrough) node = <s key={i}>{node}</s>;
+      if (child.code)
+        node = (
+          <code key={i} className="rounded bg-[#0e302e]/5 px-1.5 py-0.5 text-[0.9em]">
+            {node}
+          </code>
+        );
+      return <Fragment key={i}>{node}</Fragment>;
+    }
+
+    if (child.type === "link") {
+      return (
+        <a
+          key={i}
+          href={child.url ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#a07c3a] underline underline-offset-2"
+        >
+          {renderInlineNodes(child.children ?? [])}
+        </a>
+      );
+    }
+
+    return <Fragment key={i}>{renderInlineNodes(child.children ?? [])}</Fragment>;
+  });
+
 type Token =
   | { kind: "block"; node: ReactNode }
   | { kind: "line"; text: string }
@@ -104,6 +148,13 @@ export function RichText({
 
     switch (block.type) {
       case "paragraph": {
+        if (hasInlineFormatting(block.children)) {
+          tokens.push({
+            kind: "block",
+            node: <p key={nextKey()}>{renderInlineNodes(block.children ?? [])}</p>,
+          });
+          return;
+        }
         const text = childrenText(block.children).trim().replace(/\s+/g, " ");
         if (isCssLine(text)) return;
         if (!text) {
@@ -114,8 +165,19 @@ export function RichText({
         return;
       }
       case "heading": {
-        const text = childrenText(block.children).trim();
         const Tag = headingTag(block.level) as "h2" | "h3" | "h4" | "h5" | "h6";
+        if (hasInlineFormatting(block.children)) {
+          tokens.push({
+            kind: "block",
+            node: (
+              <Tag key={nextKey()} className={headingClass(block.level)}>
+                {renderInlineNodes(block.children ?? [])}
+              </Tag>
+            ),
+          });
+          return;
+        }
+        const text = childrenText(block.children).trim();
         tokens.push({
           kind: "block",
           node: containsHtml(text) ? (
@@ -129,29 +191,48 @@ export function RichText({
         return;
       }
       case "list": {
-        const items = (block.children ?? [])
-          .filter((child): child is StrapiBlock => !("text" in child) && child.type === "list-item")
-          .map((item) => childrenText(item.children).trim());
+        const items = (block.children ?? []).filter(
+          (child): child is StrapiBlock => !isTextNode(child) && child.type === "list-item",
+        );
         const ListTag = block.format === "ordered" ? "ol" : "ul";
         tokens.push({
           kind: "block",
           node: (
             <ListTag key={nextKey()} className="space-y-3 pl-6">
-              {items.map((item, i) =>
-                containsHtml(item) ? (
-                  <li key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(item) }} />
+              {items.map((item, i) => {
+                if (hasInlineFormatting(item.children)) {
+                  return (
+                    <li key={i} className="list-disc">
+                      {renderInlineNodes(item.children ?? [])}
+                    </li>
+                  );
+                }
+                const text = childrenText(item.children).trim();
+                return containsHtml(text) ? (
+                  <li key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(text) }} />
                 ) : (
                   <li key={i} className="list-disc">
-                    {item}
+                    {text}
                   </li>
-                ),
-              )}
+                );
+              })}
             </ListTag>
           ),
         });
         return;
       }
       case "quote": {
+        if (hasInlineFormatting(block.children)) {
+          tokens.push({
+            kind: "block",
+            node: (
+              <blockquote key={nextKey()} className="border-l-2 border-[#c7a45b] pl-5 italic">
+                {renderInlineNodes(block.children ?? [])}
+              </blockquote>
+            ),
+          });
+          return;
+        }
         const text = childrenText(block.children).trim();
         tokens.push({
           kind: "block",
