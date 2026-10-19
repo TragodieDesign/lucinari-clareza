@@ -142,10 +142,11 @@ const pages: Record<string, PageData> = {
     ],
     approach,
     audience: [
-      "Lideranças que precisam alinhar linguagem, método e tomada de decisão.",
-      "Times e PMOs que desejam aumentar a maturidade de execução.",
+      "O conhecimento precisa ser disseminado em todo o time e a liderança.",
       "Organizações em transformação que precisam transformar conhecimento em rotina.",
+      "Lideranças que precisam alinhar linguagem e método.",
     ],
+    audiencePlain: true,
     related: [
       {
         title: "Conhecimento sem aplicação prática",
@@ -241,8 +242,8 @@ const DetailPage = () => {
           </div>
           <div className="space-y-4">
             {page.audience.map((item) => (
-              <p className="flex gap-3 leading-relaxed" key={item}>
-                <ShieldCheck className="mt-1 shrink-0 text-[#a07c3a]" size={18} />
+              <p className={page.audiencePlain ? "rounded-2xl bg-white p-5 leading-relaxed" : "flex gap-3 leading-relaxed"} key={item}>
+                {!page.audiencePlain && <ShieldCheck className="mt-1 shrink-0 text-[#a07c3a]" size={18} />}
                 {item}
               </p>
             ))}
