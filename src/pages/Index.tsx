@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BrandImage from "@/components/BrandImage";
 
 const solutions = [
-  { title: "Gestão de Projetos", text: "O carro-chefe da Lucinari: visão executiva conectada à execução tática com previsibilidade e dados.", image: "/assets/governanca-pmo.png", path: "/solucoes/governanca-gestao-projetos", result: "Decisões claras, entrega previsível." },
+  { title: "Gestão de Projetos", text: "Visão executiva conectada à execução tática com previsibilidade e dados.", image: "/assets/governanca-pmo.png", path: "/solucoes/governanca-gestao-projetos", result: "Decisões claras, entrega previsível." },
   { title: "Escritório de Projetos (PMO / VMO)", text: "Um centro gerador e mensurador de valor para a gestão de projetos.", image: "/assets/vmo-valor.png", path: "/solucoes/estruturacao-pmo-vmo", result: "Projetos que medem valor." },
   { title: "Gestão Ágil", text: "Mais velocidade de resposta ao negócio e menos retrabalho.", image: "/assets/Margareth_Consulting_Agile.png", path: "/solucoes/gestao-agil", result: "Times mais rápidos e focados." },
   { title: "Educação Executiva", text: "Competências de times e lideranças para sustentar a mudança com autonomia.", image: "/assets/educacao-executiva.png", path: "/solucoes/educacao-executiva", result: "Capacidade que permanece." },
