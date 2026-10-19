@@ -9,9 +9,11 @@ type PageData = {
   intro: string;
   image: string;
   outcome: string;
+  outcomeText?: string;
   points: string[];
   approach: string[];
   audience: string[];
+  audiencePlain?: boolean;
   related: { title: string; text: string }[];
   faqs: { q: string; a: string }[];
 };
@@ -41,17 +43,14 @@ const pages: Record<string, PageData> = {
     image: "/assets/governanca-pmo.png",
     outcome: "Decisões com direção clara e um portfólio que entrega com previsibilidade.",
     points: [
-      "Alinhamento e priorização estratégica de portfólio",
-      "Estruturação de processos e rituais de governança pragmáticos (sem burocracia)",
-      "Implantação de métricas de saúde, riscos e dashboards executivos em tempo real",
-      "Diagnóstico de maturidade e plano de evolução metodológica",
+      "Estruturamos a governança, o modelo e a metodologia de projetos.",
+      "Diagnóstico de maturidade e plano de evolução metodológica de projetos",
       "Definição e gestão dos OKRs",
       "Fornecimento de gestor de projeto dedicado",
     ],
     approach,
     audience: [
       "Executivos que precisam conectar estratégia, projetos e resultados com previsibilidade.",
-      "PMOs e gestores de portfólio que desejam ritos leves e úteis.",
       "Organizações que precisam priorizar melhor e decidir com dados.",
     ],
     related: [
@@ -68,7 +67,7 @@ const pages: Record<string, PageData> = {
   },
   "estruturacao-pmo-vmo": {
     eyebrow: "Pilar 02",
-    title: "Estruturação e Otimização de PMO / VMO",
+    title: "Estruturação e Otimização de PMO\u00A0/\u00A0VMO",
     intro: "Evoluindo a gestão de projetos para um centro gerador e mensurador de valor.",
     image: "/assets/vmo-valor.png",
     outcome: "Um escritório de projetos que passa a medir e ampliar valor, não só controlar entregas.",
@@ -76,8 +75,13 @@ const pages: Record<string, PageData> = {
       "Implantação e reestruturação de PMOs (Estratégico, Tático ou Operacional)",
       "Transição de PMO tradicional para VMO (Value Management Office)",
       "Padronização de processos e templates e adequação das metodologias",
+      "Implantação de métricas de saúde, riscos e dashboards executivos em tempo real.",
     ],
-    approach,
+    approach: [
+      "Revelamos o contexto e o que impede a entrega de avançar.",
+      "Estruturamos seu escritório de projetos a entregar valor.",
+      "Acompanhamos até que o método se sustente com autonomia.",
+    ],
     audience: [
       "Organizações que querem implantar ou reestruturar um PMO com propósito claro.",
       "PMOs que precisam evoluir para uma atuação orientada a valor.",
@@ -104,7 +108,7 @@ const pages: Record<string, PageData> = {
     points: [
       "Implementação personalizada de frameworks ágeis (Scrum, Kanban, Lean)",
       "Agilidade integrada além da TI (áreas de negócio, operações e liderança)",
-      "Acompanhamento contínuo para sustentação cultural",
+      "Acompanhamento contínuo e treinamento para sustentação da metodologia.",
       "Modelos híbridos de gestão adaptados à realidade e criticidade de cada projeto",
     ],
     approach,
