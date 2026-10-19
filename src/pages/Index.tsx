@@ -60,7 +60,7 @@ const Index = () => (
           <div>
             <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Sinais de que é hora de agir</p>
             <h2 className="mt-4 font-fraunces text-4xl leading-tight">A complexidade não precisa comprometer seus resultados.</h2>
-            <p className="mt-5 leading-relaxed text-[#0e302e]/70">Quando os sinais abaixo se repetem, não falta esforço: falta um sistema claro para priorizar, executar e acompanhar o que importa.</p>
+            <p className="mt-5 leading-relaxed text-[#0e302e]/70">Quando esses sinais  se repetem, não falta esforço: falta um sistema claro para priorizar, executar e acompanhar o que importa.</p>
             <button onClick={openChat} className="mt-7 flex items-center gap-2 font-outfit text-xs font-bold uppercase tracking-wider">Conversar sobre seu contexto <ArrowRight size={15} /></button>
           </div>
           <div className="grid gap-3">
