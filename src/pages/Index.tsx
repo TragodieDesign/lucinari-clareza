@@ -49,7 +49,7 @@ const Index = () => (
         <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Nosso papel</p>
         <div>
           <p className="font-fraunces text-3xl leading-tight lg:text-4xl">Conectar a visão da diretoria à realidade dos times de execução e <em className="font-normal">construir a capacidade interna</em> para a sua empresa executar com excelência.</p>
-          <p className="mt-5 max-w-2xl leading-relaxed text-[#0e302e]/70">Nosso compromisso é desenhar estruturas funcionais (PMO/VMO), implementar métodos ágeis sob medida e desenvolver competências executivas para que sua organização entregue projetos no prazo, gerando valor real e autonomia sustentável após a consultoria.</p>
+          <p className="mt-5 max-w-2xl leading-relaxed text-[#0e302e]/70">Nosso compromisso é desenvolver competências das equipes (PMO/VMO), implementar métodos ágeis sob medida e desenvolver competências executivas para que sua organização entregue projetos no prazo, gerando valor real e autonomia sustentável após a consultoria.</p>
         </div>
       </div>
     </section>
