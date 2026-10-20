@@ -33,17 +33,17 @@ const AboutPage = () => {
   return (
     <main className="bg-[#f3eee1] text-[#0e302e]">
       <section className="bg-[#0e302e] px-6 py-20 text-white lg:px-10 lg:py-28">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_.9fr]">
+        <div className="mx-auto max-w-4xl">
           <div>
             <p className="font-outfit text-[11px] font-bold uppercase tracking-[.22em] text-[#e2c88c]">Sobre a Lucinari</p>
             <h1 className="mt-5 font-fraunces text-5xl leading-[.96] lg:text-7xl">Estratégia só ganha força quando encontra <em className="font-normal text-[#e2c88c]">entrega.</em></h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/72">A Lucinari Consulting é uma consultoria e instituição de educação executiva especializada em estruturar a governança e alinhar os níveis estratégico, tático e operacional das organizações.</p>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/72">Apoiamos empresas em diferentes estágios de maturidade a organizar seus processos, estruturar escritórios de projetos (PMO/VMO), adotar práticas ágeis e capacitar lideranças, garantindo que os resultados alcançados no dia a dia sejam exatamente aqueles planejados pelo negócio.</p>
+            <p className="mt-7 text-lg leading-relaxed text-white/72">A Lucinari Consulting é uma consultoria e instituição de educação executiva especializada em estruturar a governança e alinhar os níveis estratégico, tático e operacional das organizações.</p>
+            <p className="mt-4 text-lg leading-relaxed text-white/72">Apoiamos empresas em diferentes estágios de maturidade a organizar seus processos, estruturar escritórios de projetos (PMO/VMO), adotar práticas ágeis e capacitar lideranças, garantindo que os resultados alcançados no dia a dia sejam exatamente aqueles planejados pelo negócio.</p>
           </div>
-          <div className="rounded-[1.8rem] border border-[#c7a45b]/35 bg-[#123c38] p-8">
-            <p className="font-fraunces text-3xl leading-tight">“Da estratégia à entrega, com o fundo à vista.”</p>
-            <p className="mt-6 text-sm leading-relaxed text-white/65">Consultoria séria não decide pelo cliente. Ela revela o que precisa estar visível para que a decisão certa aconteça.</p>
-          </div>
+          <blockquote className="mt-10">
+            <p className="font-fraunces text-3xl leading-tight text-[#e2c88c]">“Da estratégia à entrega, com o fundo à vista.”</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">Consultoria séria não decide pelo cliente. Ela revela o que precisa estar visível para que a decisão certa aconteça.</p>
+          </blockquote>
         </div>
       </section>
 

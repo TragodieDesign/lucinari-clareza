@@ -87,7 +87,7 @@ const Index = () => (
               <BrandImage src={item.image} alt="" className="h-52 w-full" imgClassName="transition duration-500 group-hover:scale-105" icon={<Layers3 className="h-7 w-7" />} label={item.title} tone="mid" />
               <div className="p-6">
                 <p className="font-outfit text-[10px] font-bold uppercase tracking-widest text-[#e2c88c]">{item.result}</p>
-                <h3 className="mt-3 font-fraunces text-2xl text-white">{item.title}</h3>
+                <h3 className={`mt-3 font-fraunces text-white ${item.path === "/solucoes/estruturacao-pmo-vmo" ? "whitespace-pre-line text-lg leading-snug" : "text-2xl"}`}>{item.title}</h3>
                 <p className="mt-3 text-sm text-white/65">{item.text}</p>
                 <span className="mt-6 flex items-center gap-2 font-outfit text-xs font-bold uppercase tracking-wider text-[#e2c88c]">Explorar serviço <ArrowUpRight size={15} /></span>
               </div>

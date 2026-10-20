@@ -1,10 +1,15 @@
 import { ChevronDown, Linkedin, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { getCompanyInfo, type CompanyInfo } from "@/services/api";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const productsActive = pathname.startsWith("/solucoes/") || pathname.startsWith("/treinamentos/");
+  const activeClass = ({ isActive }: { isActive: boolean }) => isActive ? "text-[#e2c88c] underline underline-offset-8" : "transition hover:text-[#e2c88c]";
+
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0e302e]/95 text-white backdrop-blur">
@@ -19,7 +24,7 @@ export const Header = () => {
 
         <div className="hidden items-center gap-6 font-outfit text-[10px] font-semibold uppercase tracking-[.12em] text-white/75 lg:flex">
           <div className="group relative py-7">
-            <span className="flex cursor-default items-center gap-1 text-white transition group-hover:text-[#e2c88c]">
+            <span className={`flex cursor-default items-center gap-1 transition group-hover:text-[#e2c88c] ${productsActive ? "text-[#e2c88c] underline underline-offset-8" : "text-white"}`}>
               PRODUTOS <ChevronDown size={14} className="transition group-hover:rotate-180" />
             </span>
             <div className="pointer-events-none absolute left-0 top-[67px] w-80 translate-y-2 rounded-2xl border border-white/10 bg-[#123c38] p-2 opacity-0 shadow-2xl transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
@@ -38,11 +43,11 @@ export const Header = () => {
               </Link>
             </div>
           </div>
-          <Link to="/sobre">Sobre</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/conhecimentos">Conhecimentos</Link>
-          <Link to="/glossario">Glossário</Link>
-          <Link to="/cases">Cases e Treinamentos</Link>
+          <NavLink className={activeClass} to="/sobre">Sobre</NavLink>
+          <NavLink className={activeClass} to="/blog">Blog</NavLink>
+          <NavLink className={activeClass} to="/conhecimentos">Conhecimentos</NavLink>
+          <NavLink className={activeClass} to="/glossario">Glossário</NavLink>
+          <NavLink className={activeClass} to="/cases">Cases e Treinamentos</NavLink>
         </div>
 
         <button
@@ -59,12 +64,10 @@ export const Header = () => {
 
       {open && (
         <div className="border-t border-white/10 px-5 pb-5 text-center font-outfit text-xs uppercase tracking-wider lg:hidden">
-          <Link className="block py-3" to="/solucoes/governanca-gestao-projetos">Produtos</Link>
-          <Link className="block py-3" to="/sobre">Sobre</Link>
-          <Link className="block py-3" to="/blog">Blog</Link>
-          <Link className="block py-3" to="/conhecimentos">Conhecimentos</Link>
-          <Link className="block py-3" to="/glossario">Glossário</Link>
-          <Link className="block py-3" to="/cases">Cases e Treinamentos</Link>
+          <Link className={`block py-3 ${productsActive ? "text-[#e2c88c] underline underline-offset-8" : ""}`} to="/solucoes/governanca-gestao-projetos">Produtos</Link>
+          {[["/sobre", "Sobre"], ["/blog", "Blog"], ["/conhecimentos", "Conhecimentos"], ["/glossario", "Glossário"], ["/cases", "Cases e Treinamentos"]].map(([path, label]) => (
+            <NavLink key={path} className={(state) => `block py-3 ${activeClass(state)}`} to={path}>{label}</NavLink>
+          ))}
         </div>
       )}
     </header>

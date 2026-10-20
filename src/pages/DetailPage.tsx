@@ -39,7 +39,7 @@ const pages: Record<string, PageData> = {
   "governanca-gestao-projetos": {
     eyebrow: "Pilar 01",
     title: "Governança e Gestão de Projetos",
-    intro: "O carro-chefe da Lucinari: conectando a visão executiva à execução tática com previsibilidade e dados.",
+    intro: "Visão executiva dos projetos conectada à execução tática com previsibilidade e dados.",
     image: "/assets/governanca-pmo.png",
     outcome: "Decisões com direção clara e um portfólio que entrega com previsibilidade.",
     points: [
@@ -48,7 +48,11 @@ const pages: Record<string, PageData> = {
       "Definição e gestão dos OKRs",
       "Fornecimento de gestor de projeto dedicado",
     ],
-    approach,
+    approach: [
+      "Revelamos o contexto e o que impede a entrega de avançar.",
+      "Estruturamos a governança, o modelo e a metodologia de projetos.",
+      "Acompanhamos até que o método se sustente com autonomia.",
+    ],
     audience: [
       "Executivos que precisam conectar estratégia, projetos e resultados com previsibilidade.",
       "Organizações que precisam priorizar melhor e decidir com dados.",
@@ -131,16 +135,21 @@ const pages: Record<string, PageData> = {
   },
   "educacao-executiva": {
     eyebrow: "Pilar 04",
-    title: "Educação Executiva & Capacitação Corporativa",
+    title: "Educação Executiva & Capacitação dos times",
     intro: "Desenvolvendo competências dos times e as lideranças para sustentar a mudança com autonomia.",
-    image: "/assets/educacao-executiva.png",
-    outcome: "Capacidade instalada para sustentar a transformação com autonomia.",
+    image: "/assets/educacao-executiva-treinamento.png",
+    outcome: "Conhecimento compartilhado que sustenta a transformação com autonomia.",
+    outcomeText: "A atuação combina passagem de conhecimento e experiência de mercado.",
     points: [
       "Treinamentos práticos de gestão de projetos, metodologia ágil e estratégia por OKRs",
       "Desenvolvimento de liderança ágil, cultura de valor e colaboração",
       "Workshops executivos in-company aplicados a desafios reais da empresa",
     ],
-    approach,
+    approach: [
+      "Realizamos treinamento dos times nos temas desejados de metodologia de projetos.",
+      "Realização de workshop e hands-on com os cenários da empresa.",
+      "Acompanhamos até que o método se sustente com autonomia.",
+    ],
     audience: [
       "O conhecimento precisa ser disseminado em todo o time e a liderança.",
       "Organizações em transformação que precisam transformar conhecimento em rotina.",
@@ -157,7 +166,16 @@ const pages: Record<string, PageData> = {
         text: "Quando a capacidade não permanece após o projeto.",
       },
     ],
-    faqs: baseFaqs,
+    faqs: [
+      {
+        q: "Como começa a atuação?",
+        a: "Começamos com um diagnóstico da necessidade da empresa. A partir disso, desenhamos uma proposta de treinamento dos times e das lideranças.",
+      },
+      {
+        q: "O treinamento pode ser desenhado na realidade da empresa?",
+        a: "Sim, montamos o treinamento de acordo com sua necessidade.",
+      },
+    ],
   },
 };
 
@@ -186,7 +204,7 @@ const DetailPage = () => {
             <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#e2c88c]">
               Serviço · {page.eyebrow}
             </p>
-            <h1 className="mt-5 font-fraunces text-5xl leading-[.96] lg:text-7xl">{page.title}</h1>
+            <h1 className={`mt-5 font-fraunces leading-[.96] ${slug === "estruturacao-pmo-vmo" ? "text-4xl sm:text-5xl lg:text-6xl" : "text-5xl lg:text-7xl"}`}>{page.title}</h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">{page.intro}</p>
             <button
               onClick={openChat}
@@ -205,7 +223,7 @@ const DetailPage = () => {
             <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">O que fazemos</p>
             <h2 className="mt-4 font-fraunces text-4xl">{page.outcome}</h2>
             <p className="mt-5 max-w-md leading-relaxed text-[#0e302e]/70">
-              A atuação combina diagnóstico, desenho do modelo e uma cadência que transforma decisão em rotina de trabalho.
+              {page.outcomeText ?? "A atuação combina diagnóstico, desenho do modelo e uma cadência que transforma decisão em rotina de trabalho."}
             </p>
           </div>
           <div className="grid gap-3">
