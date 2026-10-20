@@ -151,9 +151,7 @@ const pages: Record<string, PageData> = {
       "Acompanhamos até que o método se sustente com autonomia.",
     ],
     audience: [
-      "O conhecimento precisa ser disseminado em todo o time e a liderança.",
-      "Organizações em transformação que precisam transformar conhecimento em rotina.",
-      "Lideranças que precisam alinhar linguagem e método.",
+      "Organizações em transformação que precisam transformar conhecimento em rotina e Lideranças que precisam alinhar linguagem e método",
     ],
     audiencePlain: true,
     related: [
