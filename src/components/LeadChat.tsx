@@ -11,7 +11,9 @@ type LeadData = {
 };
 
 const WHATSAPP_NUMBER = "5511994706023";
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL as string | undefined;
+const WEBHOOK_URL = import.meta.env.PROD
+  ? "https://lucinari-consulting-n8n.uar6l1.easypanel.host/webhook/533602a5-f703-4b2e-b44a-aaf124ddc9aa"
+  : "https://lucinari-consulting-n8n.uar6l1.easypanel.host/webhook-test/533602a5-f703-4b2e-b44a-aaf124ddc9aa";
 
 const formatPhone = (value: string) => {
   const digits = value.replace(/\D/g, "").slice(0, 11);
@@ -65,17 +67,16 @@ const LeadChat = ({ contextualInterest }: { contextualInterest?: string }) => {
     // Abrir durante o clique evita o bloqueio de pop-ups após uma chamada assíncrona.
     window.open(url, "_blank", "noopener,noreferrer");
 
-    if (STRAPI_URL) {
-      void fetch(`${STRAPI_URL.replace(/\/$/, "")}/api/leads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }).then((response) => {
-        if (!response.ok) console.warn("Não foi possível registrar o atendimento no CMS.");
-      }).catch(() => {
-        // O contato continua pelo WhatsApp mesmo quando o CMS está indisponível.
-      });
-    }
+    void fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).then((response) => {
+      if (!response.ok) console.warn(`O webhook n8n não recebeu o atendimento (${response.status}).`);
+    }).catch(() => {
+      console.warn("Não foi possível enviar o atendimento ao webhook n8n. Verifique a conexão e a configuração de CORS.");
+    });
   };
 
   const advance = () => {
