@@ -137,7 +137,7 @@ const pages: Record<string, PageData> = {
     eyebrow: "Pilar 04",
     title: "Educação Executiva & Capacitação dos times",
     intro: "Desenvolvendo competências dos times e as lideranças para sustentar a mudança com autonomia.",
-    image: "/assets/educacao-executiva-treinamento.png",
+    image: "/assets/educacao-executiva-roadmap.png",
     outcome: "Conhecimento compartilhado que sustenta a transformação com autonomia.",
     outcomeText: "A atuação combina passagem de conhecimento e experiência de mercado.",
     points: [
