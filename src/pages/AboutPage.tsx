@@ -40,10 +40,6 @@ const AboutPage = () => {
             <p className="mt-7 text-lg leading-relaxed text-white/72">A Lucinari Consulting é uma consultoria e instituição de educação executiva especializada em estruturar a governança e alinhar os níveis estratégico, tático e operacional das organizações.</p>
             <p className="mt-4 text-lg leading-relaxed text-white/72">Apoiamos empresas em diferentes estágios de maturidade a organizar seus processos, estruturar escritórios de projetos (PMO/VMO), adotar práticas ágeis e capacitar lideranças, garantindo que os resultados alcançados no dia a dia sejam exatamente aqueles planejados pelo negócio.</p>
           </div>
-          <blockquote className="mt-10">
-            <p className="font-fraunces text-3xl leading-tight text-[#e2c88c]">“Da estratégia à entrega, com o fundo à vista.”</p>
-            <p className="mt-4 text-sm leading-relaxed text-white/65">Consultoria séria não decide pelo cliente. Ela revela o que precisa estar visível para que a decisão certa aconteça.</p>
-          </blockquote>
         </div>
       </section>
 
@@ -57,7 +53,7 @@ const AboutPage = () => {
             <p>A Lucinari nasceu para apoiar organizações que precisam alinhar prioridades, transformar decisões em cadência e tornar o valor da execução visível.</p>
             <p>A atuação combina consultoria estratégica e educação aplicada.</p>
             <p>Ajudamos empresas a sair da sobrecarga operacional por meio de um sistema claro de priorização, acompanhamento e entrega de valor.</p>
-            <p>Unimos diagnóstico prático, desenho de processos (PMO/VMO e Agilidade) e capacitação executiva. Criamos modelos funcionais que respeitam o momento da sua empresa e fortalecem a tomada de decisão em todos os níveis hierárquicos. O resultado é uma operação mais fluida, lideranças preparadas e metas estratégicas que se concretizam no prazo planejado.</p>
+            <p>Unimos diagnóstico prático, gestão estratégica de projetos (PMO/VMO), implementação de métodos ágeis e capacitação executiva. Estruturamos a governança de projetos de forma adaptada ao momento da sua empresa, fortalecendo a tomada de decisão em todos os níveis. O resultado é uma operação mais fluida, lideranças preparadas e metas estratégicas que se concretizam no prazo planejado.</p>
           </div>
         </div>
       </section>
