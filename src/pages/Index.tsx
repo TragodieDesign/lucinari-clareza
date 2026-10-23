@@ -4,9 +4,9 @@ import BrandImage from "@/components/BrandImage";
 
 const solutions = [
   { title: "Gestão de Projetos", text: "Visão executiva dos projetos conectada à execução tática com previsibilidade e dados.", image: "/assets/governanca-pmo.png", path: "/solucoes/governanca-gestao-projetos", result: "Decisões claras, entrega previsível." },
-  { title: "Escritório de Projetos \n  (PMO / VMO)", text: "Um centro gerador e mensurador de valor para a gestão de projetos.", image: "/assets/vmo-valor.png", path: "/solucoes/estruturacao-pmo-vmo", result: "Projetos que medem valor." },
+  { title: "Escritório de Projetos \n  (PMO / VMO)", text: "Um centro gerador e mensurador de valor para a gestão de projetos.", image: "/assets/escritorio-projetos-roadmap.png", path: "/solucoes/estruturacao-pmo-vmo", result: "Projetos que medem valor." },
   { title: "Gestão Ágil", text: "Mais velocidade de resposta ao negócio e menos retrabalho.", image: "/assets/Margareth_Consulting_Agile.png", path: "/solucoes/gestao-agil", result: "Times ágeis e focados." },
-  { title: "Educação Executiva", text: "Competências de times e lideranças para sustentar a mudança com autonomia.", image: "/assets/educacao-executiva-roadmap.png", path: "/solucoes/educacao-executiva", result: "Capacidade que permanece." },
+  { title: "Educação Executiva", text: "Competências de times e lideranças para sustentar a mudança com autonomia.", image: "/assets/educacao-executiva-treinamento.png", path: "/solucoes/educacao-executiva", result: "Capacidade que permanece." },
 ];
 
 const painPoints = ["Falta de visibilidade e dados confiáveis para a tomada de decisão executiva.", "O portfólio cresce, mas a capacidade real de entrega não acompanha.", "A estratégia corporativa muda, mas as iniciativas continuam presas à rota antiga.", "Projetos são finalizados, mas o retorno real (valor) não se concretiza."];

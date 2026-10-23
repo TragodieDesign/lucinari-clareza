@@ -73,7 +73,7 @@ const pages: Record<string, PageData> = {
     eyebrow: "Pilar 02",
     title: "Estruturação e Otimização de PMO\u00A0/\u00A0VMO",
     intro: "Evoluindo a gestão de projetos para um centro gerador e mensurador de valor.",
-    image: "/assets/vmo-valor.png",
+    image: "/assets/escritorio-projetos-roadmap.png",
     outcome: "Um escritório de projetos que passa a medir e ampliar valor, não só controlar entregas.",
     points: [
       "Implantação e reestruturação de PMOs (Estratégico, Tático ou Operacional)",
@@ -137,7 +137,7 @@ const pages: Record<string, PageData> = {
     eyebrow: "Pilar 04",
     title: "Educação Executiva & Capacitação dos times",
     intro: "Desenvolvendo competências dos times e as lideranças para sustentar a mudança com autonomia.",
-    image: "/assets/educacao-executiva-roadmap.png",
+    image: "/assets/educacao-executiva-treinamento.png",
     outcome: "Conhecimento compartilhado que sustenta a transformação com autonomia.",
     outcomeText: "A atuação combina passagem de conhecimento e experiência de mercado.",
     points: [
