@@ -1,7 +1,9 @@
 import { ArrowLeft, ArrowUpRight, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import RichText from "@/components/RichText";
+import ContentFilters from "@/components/ContentFilters";
+import { normalizeSearch, sortContent, type ContentSort } from "@/lib/content-order";
 import {
   getCases,
   getCaseBySlug,
@@ -28,6 +30,9 @@ type Item = {
   excerpt: string;
   body: StrapiBlock[];
   eyebrow: string | null;
+  order?: number | null;
+  date?: string | null;
+  client?: string | null;
 };
 
 const mapCase = (entry: CaseStudy): Item => ({
@@ -36,6 +41,9 @@ const mapCase = (entry: CaseStudy): Item => ({
   excerpt: entry.excerpt,
   body: entry.description,
   eyebrow: "Case",
+  order: entry.order,
+  date: entry.date,
+  client: entry.client,
 });
 
 const mapKnowledge = (entry: KnowledgeItem): Item => ({
@@ -44,6 +52,8 @@ const mapKnowledge = (entry: KnowledgeItem): Item => ({
   excerpt: entry.excerpt,
   body: entry.content,
   eyebrow: formatDate(entry.published_date),
+  order: entry.order,
+  date: entry.published_date,
 });
 
 type CollectionConfig = {
@@ -93,6 +103,17 @@ const ListView = ({ kind }: { kind: ListKind }) => {
   const [items, setItems] = useState<Item[]>([]);
   const [status, setStatus] = useState<"loading" | "error" | "success">("loading");
   const [attempt, setAttempt] = useState(0);
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<ContentSort>("priority");
+  const visibleItems = useMemo(() => sortContent(
+    items.filter((item) => normalizeSearch(`${item.title} ${item.excerpt} ${item.client ?? ""}`).includes(normalizeSearch(query))),
+    sort, (item) => item.title, (item) => item.date,
+  ), [items, query, sort]);
+
+  useEffect(() => {
+    setQuery("");
+    setSort("priority");
+  }, [kind]);
 
   useEffect(() => {
     document.title = `${cfg.label} | Lucinari Consulting`;
@@ -120,6 +141,9 @@ const ListView = ({ kind }: { kind: ListKind }) => {
         </p>
         <h1 className="mt-4 max-w-3xl font-fraunces text-5xl leading-[.98] lg:text-7xl">{cfg.title}</h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#0e302e]/70">{cfg.intro}</p>
+
+        {status === "success" && <ContentFilters query={query} onQueryChange={setQuery} sort={sort} onSortChange={setSort} options={["priority", "newest", "oldest", "alphabetical"]} count={visibleItems.length} />}
+        {status === "success" && items.length > 0 && visibleItems.length === 0 && <p className="mt-10 rounded-2xl bg-[#fffdf8] p-8 text-center text-[#0e302e]/75">Nenhum conteúdo encontrado. Tente outro título ou assunto.</p>}
 
         {status === "loading" && (
           <div className="mt-12 grid min-h-72 place-items-center rounded-[1.6rem] border border-[#0e302e]/10 bg-[#fffdf8]">
@@ -151,7 +175,7 @@ const ListView = ({ kind }: { kind: ListKind }) => {
             </div>
           ) : (
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
-              {items.map((item) => (
+              {visibleItems.map((item) => (
                 <article
                   key={item.slug}
                   className="flex min-h-80 flex-col rounded-[1.6rem] border border-[#0e302e]/10 bg-[#fffdf8] p-6"

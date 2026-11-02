@@ -39,6 +39,7 @@ export type BlogPost = {
   content: string | StrapiBlock[];
   published_date: string;
   cover: StrapiMedia | null;
+  order?: number | null;
 };
 
 export type GlossaryTerm = {
@@ -48,6 +49,7 @@ export type GlossaryTerm = {
   slug: string;
   short_definition: string;
   definition: StrapiBlock[];
+  order?: number | null;
 };
 
 export type CompanyInfo = {
@@ -71,6 +73,7 @@ export type CaseStudy = {
   client: string | null;
   date: string | null;
   cover: StrapiMedia | null;
+  order?: number | null;
 };
 
 export type KnowledgeItem = {
@@ -83,6 +86,7 @@ export type KnowledgeItem = {
   featured: boolean | null;
   published_date: string;
   cover: StrapiMedia | null;
+  order?: number | null;
 };
 
 type StrapiListResponse = {
@@ -103,9 +107,23 @@ async function request<T>(url: string): Promise<T> {
   return (await response.json()) as T;
 }
 
+async function requestCollection<T>(collection: string): Promise<T[]> {
+  const items: T[] = [];
+  let page = 1;
+  let pageCount = 1;
+  do {
+    const response = await request<{ data: T[]; meta?: { pagination?: { pageCount: number } } }>(
+      `${API_URL}/${collection}?populate=*&sort=id:asc&pagination[page]=${page}&pagination[pageSize]=100`,
+    );
+    items.push(...(response.data ?? []));
+    pageCount = response.meta?.pagination?.pageCount ?? 1;
+    page += 1;
+  } while (page <= pageCount);
+  return items;
+}
+
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  const data = await request<StrapiListResponse>(`${API_URL}/blog-posts?populate=*`);
-  return data.data ?? [];
+  return requestCollection<BlogPost>("blog-posts");
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
@@ -116,8 +134,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
 }
 
 export async function getGlossaryTerms(): Promise<GlossaryTerm[]> {
-  const data = await request<StrapiGlossaryListResponse>(`${API_URL}/glossaries?populate=*`);
-  return data.data ?? [];
+  return requestCollection<GlossaryTerm>("glossaries");
 }
 
 export async function getGlossaryTermBySlug(slug: string): Promise<GlossaryTerm | null> {
@@ -148,8 +165,7 @@ type StrapiKnowledgeListResponse = {
 };
 
 export async function getCases(): Promise<CaseStudy[]> {
-  const data = await request<StrapiCaseListResponse>(`${API_URL}/cases?populate=*`);
-  return data.data ?? [];
+  return requestCollection<CaseStudy>("cases");
 }
 
 export async function getCaseBySlug(slug: string): Promise<CaseStudy | null> {
@@ -160,8 +176,7 @@ export async function getCaseBySlug(slug: string): Promise<CaseStudy | null> {
 }
 
 export async function getKnowledges(): Promise<KnowledgeItem[]> {
-  const data = await request<StrapiKnowledgeListResponse>(`${API_URL}/knowledges?populate=*`);
-  return data.data ?? [];
+  return requestCollection<KnowledgeItem>("knowledges");
 }
 
 export async function getKnowledgeBySlug(slug: string): Promise<KnowledgeItem | null> {

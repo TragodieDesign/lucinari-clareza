@@ -1,7 +1,9 @@
 import { ArrowUpRight, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import BrandImage from "@/components/BrandImage";
+import ContentFilters from "@/components/ContentFilters";
+import { normalizeSearch, sortContent, type ContentSort } from "@/lib/content-order";
 import { buildMediaUrl, getBlogPosts, type BlogPost } from "@/services/api";
 
 const formatDate = (value: string) => {
@@ -19,6 +21,12 @@ const BlogPage = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [status, setStatus] = useState<Status>("loading");
   const [attempt, setAttempt] = useState(0);
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<ContentSort>("newest");
+  const visiblePosts = useMemo(() => sortContent(
+    posts.filter((post) => normalizeSearch(`${post.title} ${post.excerpt}`).includes(normalizeSearch(query))),
+    sort, (post) => post.title, (post) => post.published_date,
+  ), [posts, query, sort]);
 
   useEffect(() => {
     document.title = "Blog | Lucinari Consulting";
@@ -66,6 +74,9 @@ const BlogPage = () => {
           </button>
         </div>
 
+        {status === "success" && <ContentFilters query={query} onQueryChange={setQuery} sort={sort} onSortChange={setSort} options={["newest", "oldest", "alphabetical"]} count={visiblePosts.length} />}
+        {status === "success" && posts.length > 0 && visiblePosts.length === 0 && <p className="mt-10 rounded-2xl bg-[#fffdf8] p-8 text-center text-[#0e302e]/75">Nenhum artigo encontrado. Tente outro título ou assunto.</p>}
+
         {status === "loading" && (
           <div className="mt-12 grid min-h-72 place-items-center rounded-[1.6rem] border border-[#0e302e]/10 bg-[#fffdf8]">
             <div className="flex flex-col items-center gap-3 text-[#0e302e]/60">
@@ -96,7 +107,7 @@ const BlogPage = () => {
             </div>
           ) : (
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
-              {posts.map((post) => {
+              {visiblePosts.map((post) => {
                 const coverUrl = buildMediaUrl(post.cover?.url);
                 return (
                   <article
