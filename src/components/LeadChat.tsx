@@ -58,7 +58,7 @@ const LeadChat = ({ contextualInterest }: { contextualInterest?: string }) => {
     submitted.current = true;
     const bytes = crypto.getRandomValues(new Uint8Array(16));
     const code = `LUC-${Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("").toUpperCase()}`;
-    const payload = { data: { ...finalLead, attendanceCode: code } };
+    const payload = { data: { ...finalLead, phone: Number(finalLead.phone.replace(/\D/g, "")), attendanceCode: code } };
     const text = `Olá, sou ${finalLead.name}, estou interessado em ${finalLead.interest}, e meu código de atendimento é ${code}`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     setAttendanceCode(code);
